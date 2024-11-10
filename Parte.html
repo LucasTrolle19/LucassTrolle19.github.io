@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucas - Portfolio Personal</title>
+    <link href="El.css" rel="stylesheet">
+    <style>
+        /* Esquema de colores de la web */
+        :root {
+            --primary-color: #2563eb;        /* Azul principal */
+            --primary-dark: #1d4ed8;         /* Azul oscuro para hover */
+            --accent-color: #3b82f6;         /* Azul acento */
+            --background-light: #f8fafc;     /* Fondo claro */
+            --background-dark: #1e293b;      /* Fondo oscuro */
+            --text-primary: #1e293b;         /* Texto principal */
+            --text-secondary: #64748b;       /* Texto secundario */
+            --white: #ffffff;                /* Blanco */
+            --success: #10b981;              /* Verde éxito */
+            --warning: #f59e0b;              /* Amarillo advertencia */
+        }
+
+        /* Reset y estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--background-light);
+        }
+
+        /* Header y navegación */
+        header {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(rgba(30, 41, 59, 0.7), rgba(30, 41, 59, 0.8)),
+                        url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: var(--white);
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid var(--primary-color);
+
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--background-dark);
+            padding: 1rem;
+            z-index: 100;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Cookie notice */
+        #cookie-notice {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: var(--background-dark);
+            color: var(--white);
+            padding: 1rem;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        #cookie-notice button {
+            background: var(--primary-color);
+            border: none;
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            margin-left: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        #cookie-notice button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Sobre mí */
+        .about {
+            padding: 4rem 2rem;
+            background: var(--background-light);
+        }
+
+        .bio-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .social-icons {
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Proyectos */
+        .projects {
+            padding: 4rem 2rem;
+            background: var(--white);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: var(--background-light);
+        }
+
+        .project-info {
+            padding: 1rem;
+        }
+
+        .project-info h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-info p {
+            color: var(--text-secondary);
+        }
+
+        /* Habilidades */
+        .skills {
+            padding: 4rem 2rem;
+            background: var(--background-light);
+        }
+
+        .skill-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .skill-bar {
+            width: 100%;
+            background: #e2e8f0;
+            height: 20px;
+            border-radius: 10px;
+            margin: 10px 0 20px 0;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 10px;
+            transition: width 1s;
+        }
+
+        .skills h3 {
+            color: var(--text-primary);
+            margin-top: 1rem;
+        }
+
+        /* Contacto */
+        .contact {
+            padding: 4rem 2rem;
+            background: var(--white);
+        }
+
+        .contact h2 {
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+        }
+
+        .contact form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 5px;
+            transition: all 0.3s;
+            color: var(--text-primary);
+        }
+
+        .form-group input:hover,
+        .form-group textarea:hover {
+            border-color: var(--accent-color);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        button[type="submit"] {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: bold;
+        }
+
+        button[type="submit"]:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--background-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Secciones generales */
+        section {
+            padding: 4rem 2rem;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- El resto del HTML -->
+    <!-- Navegación -->
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#sobre-mi">Sobre Mí</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+
+    <!-- Aviso de cookies -->
+    <div id="cookie-notice">
+        Esta web usa cookies para mejorar tu experiencia.
+        <button onclick="this.parentElement.style.display='none'">Aceptar</button>
+    </div>
+
+    <!-- Header -->
+    <header id="inicio">
+      <img src="IMG_7808.jpeg" class="logo"> </div>
+        <h1>Lucas Trolle</h1>
+        <p>Desarrollador Web</p>
+    </header>
+
+    <!-- Sobre Mí -->
+    <section id="sobre-mi" class="about">
+        <h2>Sobre Mí</h2>
+        <div class="bio-card">
+            <p>Soy un estudiante de ASIR, tengo 19 años actualmente, en cuanto a mis aficiones me gusta mucho la tecnología y el desarrollo web. Me especializo en crear soluciones digitales innovadoras y efectivas en diferentes entornos atraves de herramientas como Html y Css, ademas tengo una titulacion en experto de Markenting y Publicidad para las empresas.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section id="proyectos" class="projects">
+        <h2>Mis Proyectos</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image"></div>
+                <div class="project-info"> <img src="tipos_marketing_empresarial.png">                    <h3>Proyecto 1</h3>
+                    <p>Desarrollo de aplicación web con HTML y CSS</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image"></div>
+                <img src="BLOG-LFC-Marketing-digital-1200x630-1.jpg">
+                <div class="project-info">
+                    <h3>Proyecto 2</h3>
+                    <p>Diseño de una pagina Web para una empresa de Marketing</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image"></div>
+                <img src="cms.jpg">
+                <div class="project-info">
+                    <h3>Proyecto 3</h3>
+                    <p>Sistema de gestión de contenidos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Habilidades -->
+    
+<html>
+<head>
+    <style>
+        .skills-section {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            color: #2c3e50;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, #ff7e33, #3498db);
+            border-radius: 2px;
+        }
+
+        .skill-item {
+            margin-bottom: 30px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #34495e;
+            font-size: 18px;
+        }
+
+        .percentage {
+            color: #ff7e33;
+            font-weight: bold;
+        }
+
+        .progress-container {
+            background: #f0f5f9;
+            height: 12px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 20px;
+            transition: width 1.5s ease-in-out;
+            background: linear-gradient(to right, #ff7e33, #3498db);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                45deg,
+                rgba(255,255,255,0.2) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255,255,255,0.2) 50%,
+                rgba(255,255,255,0.2) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 20px 20px;
+            animation: moveStripes 2s linear infinite;
+        }
+
+        @keyframes moveStripes {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="skills-section">
+        <h2 class="section-title">Habilidades y Conocimientos</h2>
+        
+        <div class="skill-item">
+            <div class="skill-name">
+                <span>HTML5</span>
+                <span class="percentage">70%</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 70%"></div>
+            </div>
+        </div>
+
+        <div class="skill-item">
+            <div class="skill-name">
+                <span>CSS3
+                </span>
+                <span class="percentage">50%</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" style="width: 50%"></div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+            
+            
+                <style>
+                    .skills-container {
+                        max-width: 600px;
+                        margin: 20px auto;
+                        padding: 20px;
+                        font-family: Arial, sans-serif;
+                        background: white;
+                        border-radius: 10px;
+                        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                    }
+            
+                    h2 {
+                        color: #333;
+                        margin-bottom: 30px;
+                    }
+            
+                    .language-item {
+                        margin-bottom: 25px;
+                    }
+            
+                    h3 {
+                        margin: 0 0 10px 0;
+                        color: #444;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+            
+                    .native-tag {
+                        font-size: 14px;
+                        color: #666;
+                        font-weight: normal;
+                    }
+            
+                    .skill-bar {
+                        width: 100%;
+                        height: 10px;
+                        background-color: #f0f0f0;
+                        border-radius: 5px;
+                        overflow: hidden;
+                    }
+            
+                    .skill-progress {
+                        height: 100%;
+                        border-radius: 5px;
+                        transition: width 1s ease-in-out;
+                    }
+            
+                    .spanish-bar {
+                        background-color: #2563eb; /* Azul más oscuro */
+                        width: 100%;
+                    }
+            
+                    .english-bar {
+                        background-color: #3b82f6; /* Azul medio */
+                        width: 67%;
+                    }
+            
+                    .french-bar {
+                        background-color: #60a5fa; /* Azul más claro */
+                        width: 35%;
+                    }
+            
+                    .percentage {
+                        font-size: 14px;
+                        color: #666;
+                        margin-left: 10px;
+                    }
+                </style>
+            
+                <div class="skills-container">
+                    <h2>Idiomas</h2>
+                    
+                    <div class="language-item">
+                        <h3>
+                            Español
+                            <span class="native-tag"> Lengua materna</span>
+                        </h3>
+                        <div class="skill-bar">
+                            <div class="skill-progress spanish-bar"></div>
+                        </div>
+                    </div>
+            
+                    <div class="language-item">
+                        <h3>
+                            Inglés
+                            <span class="percentage">60%</span>
+                        </h3>
+                        <div class="skill-bar">
+                            <div class="skill-progress english-bar"></div>
+                        </div>
+                    </div>
+            
+                    <div class="language-item">
+                        <h3>
+                            Francés
+                            <span class="percentage">35%</span>
+                        </h3>
+                        <div class="skill-bar">
+                            <div class="skill-progress french-bar"></div>
+                        </div>
+                    </div>
+                </div>
+           
+         
+
+    <!-- Contacto -->
+    <section id="contacto" class="contact">
+        <h2>¿Quieres contratarme? ¡Hablemos!</h2>
+        <form>
+            <div class="form-group">
+                <input type="text" placeholder="Nombre" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <textarea placeholder="Mensaje" required rows="5"></textarea>
+            </div>
+            <button type="submit">Enviar Mensaje</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Lucas</p>
+    </footer>
+
+    <script>
+        // Script para ocultar el aviso de cookies después de 5 segundos
+        setTimeout(() => {
+            const cookieNotice = document.getElementById('cookie-notice');
+            if (cookieNotice) {
+                cookieNotice.style.display = 'none';
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
